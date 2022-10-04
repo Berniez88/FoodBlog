@@ -1,7 +1,11 @@
 import React from "react";
-
+import FakeData from "./components/FakeData";
 function App() {
-  return <div>App</div>;
+  return (
+    <>
+      <FakeData />
+    </>
+  );
 }
 
 export default App;
