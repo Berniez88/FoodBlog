@@ -22,7 +22,6 @@ function App() {
       <SearchBar></SearchBar>
       <h1>Testing</h1>
       <button onClick={api}>Click me to generate recipes</button>
-      {/* <img className="backgroundImage" src={cover} alt="" /> */}
     </>
   );
 }
