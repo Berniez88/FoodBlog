@@ -4,6 +4,7 @@ import { TextField, Button } from "../mui";
 function SearchBar() {
   const [inputText, setInputText] = useState("");
   const submitSearch = (e) => {
+    console.log(e.target.value);
     console.log("data is", e.target.value);
   };
   let inputHandler = (e) => {
@@ -16,17 +17,24 @@ function SearchBar() {
       <div className="main">
         <h1>Recipe Search</h1>
         <div className="search">
-          <TextField
+          <form>
+            <input type="text" placeholder="testing" />
+            <Button variant="contained" id="userInput" onClick={submitSearch}>
+              Submit
+            </Button>
+          </form>
+          {/* <TextField
             id="outlined-basic"
             label="Search"
             fullWidth
             htmlFor="userInput"
             type="search"
-            // onChange={inputHandler}
+            onChange={inputHandler}
           />
+
           <Button variant="contained" id="userInput" onClick={submitSearch}>
             Submit
-          </Button>
+          </Button> */}
         </div>
       </div>
     </>
