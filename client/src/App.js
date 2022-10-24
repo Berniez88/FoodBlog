@@ -3,26 +3,31 @@ import FakeData from "./components/FakeData";
 import SearchBar from "./components/SearchBar";
 import cover from "../src/images/food.jpg";
 function App() {
-  const [data, setData] = useState();
-  const apiKey = "3c865aa7fe96459cae1583d69c3e52e3";
-  const api = (e) => {
+  // States
+  const [APIData, SetAPIData] = useState();
+  // State used to retrieve the userInput in the child component SearchBar
+  const [userSearchedResults, setUserSearchedResults] = useState("");
+  const apiKey = "256693ab455d4924b302bc239a965907";
+
+  // Function that calls the API
+  const api = (userInput) => {
     fetch(
-      //  `https://api.spoonacular.com/recipes/random?apiKey=${apiKey}&number=5`
-      ` https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${e.target}&number=2`
+      ` https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${userInput}&number=2`
     )
       .then((res) => res.json())
-      .then((data) => setData(data))
+      .then((data) => SetAPIData(data))
       .catch((err) => {
         console.log(`error: ${err}`);
       });
-    console.log(" this is the value", e.target.value);
   };
-  console.log("data is: ", data);
+
+  console.log("te data is", APIData);
   return (
     <>
-      <SearchBar></SearchBar>
-      <h1>Testing</h1>
-      <button onClick={api}>Click me to generate recipes</button>
+      <SearchBar
+        api={api}
+        setUserSearchedResults={setUserSearchedResults}
+      ></SearchBar>
     </>
   );
 }

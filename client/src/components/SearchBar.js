@@ -1,28 +1,32 @@
 import React, { useState } from "react";
 import "../css/SearchBar.css";
 import { TextField, Button } from "../mui";
-function SearchBar() {
-  const [inputText, setInputText] = useState("");
-  const submitSearch = (e) => {
-    console.log(e.target.value);
-    console.log("data is", e.target.value);
+function SearchBar({ api, setUserSearchedResults }) {
+  const [searchResults, setSearchResults] = useState("");
+
+  const searchRecipe = (e) => {
+    e.preventDefault();
+    console.log("user typed in", searchResults);
+    api(searchResults);
   };
-  let inputHandler = (e) => {
-    console.log(e.target.value);
-    let data = e.target.value;
-    console.log("data is: ", data);
-  };
+
   return (
     <>
       <div className="main">
         <h1>Recipe Search</h1>
         <div className="search">
-          <form>
-            <input type="text" placeholder="testing" />
-            <Button variant="contained" id="userInput" onClick={submitSearch}>
+          <form onSubmit={searchRecipe} className="searchForm">
+            <label className="label">Search for Recipes</label>
+            <input
+              type="text"
+              value={searchResults}
+              onChange={(e) => setSearchResults(e.target.value)}
+            />
+            <Button variant="contained" id="userInput" onClick={searchRecipe}>
               Submit
             </Button>
           </form>
+
           {/* <TextField
             id="outlined-basic"
             label="Search"

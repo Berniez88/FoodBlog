@@ -1,4 +1,4 @@
-.main {
+/* .main {
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -15,4 +15,16 @@ h1 {
   display: flex;
   justify-content: center;
   width: 20%;
+} */
+
+.searchForm {
+  display: flex;
+  justify-content: center;
+}
+.label {
+  padding-left: 8px;
+  padding-right: 8px;
+  background-color: rgb(142, 142, 183);
+  display: flex;
+  align-items: center;
 }
