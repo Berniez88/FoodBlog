@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../css/SearchBar.css";
-import { TextField, Button } from "../mui";
+import { Button } from "@mui/material";
+// import { TextField, Button } from "../mui";
 function SearchBar({ api, setUserSearchedResults }) {
   const [searchResults, setSearchResults] = useState("");
 
@@ -26,19 +27,6 @@ function SearchBar({ api, setUserSearchedResults }) {
               Submit
             </Button>
           </form>
-
-          {/* <TextField
-            id="outlined-basic"
-            label="Search"
-            fullWidth
-            htmlFor="userInput"
-            type="search"
-            onChange={inputHandler}
-          />
-
-          <Button variant="contained" id="userInput" onClick={submitSearch}>
-            Submit
-          </Button> */}
         </div>
       </div>
     </>
