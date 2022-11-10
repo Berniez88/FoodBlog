@@ -2,77 +2,54 @@ import React, { useState } from "react";
 import FakeData from "./components/FakeData";
 import SearchBar from "./components/SearchBar";
 import cover from "../src/images/food.jpg";
+import { handleBreakpoints } from "@mui/system";
 function App() {
   // States
-  const [APIData, SetAPIData] = useState();
+  const [APIData, SetAPIData] = useState("");
   const [id, SetId] = useState([]);
   const [recipeInfo, setRecipeInfo] = useState();
-
-  // State used to retrieve the userInput in the child component SearchBar
   const [userSearchedResults, setUserSearchedResults] = useState("");
-  const apiKey = "0b0d63fd7ff5490a872ecf609d11b125";
 
-  // Function that calls the API
-  // const api = (userInput) => {
-  //   fetch(
-  //     `https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${userInput}&number=2`
-  //   )
-  //     .then((res) => res.json())
-  //     .then((data) => SetAPIData(data))
-  //     .catch((err) => {
-  //       console.log(`error: ${err}`);
-  //     });
-  // };
-  //! Testing code
-  // basically I want to make an api request to search what the user entered, and get the recipe back from that specific id
+  const apiKey = "dfee2e6419d14f5989a2c277848d8def";
+  let ids = [];
 
-  const api = (userInput) => {
-    fetch(
+  // Grabs the search results/id we need
+  const grabSearchResults = async (userInput) => {
+    const response = await fetch(
       ` https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${userInput}&number=2`
-    )
-      .then((res) => res.json())
-      .then((data) => {
-        // SetId();
-        console.log("data is: ", data);
-        // grabId();
-        return SetAPIData(data);
-      })
-      .catch((err) => {
-        console.log("error is :", err);
-      });
-    console.log("APIDATA", APIData); // the array of obj for results
+    );
+    const searchResultsData = await response.json();
+    SetAPIData(searchResultsData);
+    console.log("searchResultsData is", searchResultsData);
   };
 
-  //! I need to figure out how to iterate thru the obj and store both IDs
-  const grabId = () => {
+  // Stores the id so we can fetch the additional info
+  const grabIds = () => {
     for (let key in APIData.results) {
-      console.log("key is: ", key, "api data is: ", APIData.results[key]);
+      // SetId([...id, APIData.results[key].id]); returns an infinite rerender error
+      ids.push(APIData.results[key].id);
       // SetId((prevState) => [...prevState, APIData.results[key].id]);
     }
   };
+  grabIds();
 
-  const searchedRecipeInfo = (recipes) => {
-    for (let i = 0; i < 1; i++) {
-      console.log(recipes[i]);
+  async function loadRecipes() {
+    for (let id of ids) {
+      const response = await fetch(
+        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`
+      );
+      const recipeInfo = await response.json();
+      console.log("recipeInfo is", recipeInfo);
+      // setRecipeInfo(recipeInfo);
     }
-    // fetch(
-    //   `https://api.spoonacular.com/recipes/${id}}/information?apiKey=${apiKey}`
-    // )
-    //   .then((res) => {
-    //     res.json();
-    //   })
-    //   .then((data) => {
-    //     setRecipeInfo(data);
-    //   })
-    //   .catch((err) => {
-    //     console.log("error is :", err);
-    //   });
-  };
+  }
+  loadRecipes();
 
+  console.log("recipeInfo is now: ");
   return (
     <>
       <SearchBar
-        api={api}
+        grabSearchResults={grabSearchResults}
         setUserSearchedResults={setUserSearchedResults}
       ></SearchBar>
     </>
