@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import "../css/SearchBar.css";
 import { Button } from "@mui/material";
-// import { TextField, Button } from "../mui";
-function SearchBar({ grabSearchResults, setUserSearchedResults }) {
+function SearchBar({ grabSearchResults }) {
   const [searchResults, setSearchResults] = useState("");
 
   const searchRecipe = (e) => {
     e.preventDefault();
-    console.log("user typed in", searchResults);
     grabSearchResults(searchResults);
   };
 
