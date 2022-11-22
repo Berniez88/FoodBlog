@@ -97,6 +97,7 @@ function App() {
     loadRecipes();
   };
 
+  // Use the ids of the recipe we searched to get additional info on the recipe
   async function loadRecipes() {
     for (let id of ids) {
       const response = await fetch(

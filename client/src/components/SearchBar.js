@@ -21,7 +21,7 @@ function SearchBar({ grabSearchResults }) {
               value={searchResults}
               onChange={(e) => setSearchResults(e.target.value)}
             />
-            <Button variant="contained" id="userInput" onClick={searchRecipe}>
+            <Button variant="contained" id="userInput" type="submit">
               Submit
             </Button>
           </form>
