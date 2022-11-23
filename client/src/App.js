@@ -78,17 +78,23 @@ function App() {
 
   // Grabs the search results/id we need
   const grabSearchResults = async (userInput) => {
-    const response = await fetch(
-      ` https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${userInput}&number=2`
-    );
-    const searchResultsData = await response.json();
-    SetInitialFetch(searchResultsData);
-    console.log("searchResultsData is", searchResultsData);
-    grabIds();
+    try {
+      const response = await fetch(
+        ` https://api.spoonacular.com/recipes/complexSearch?apiKey=${apiKey}&query=${userInput}&number=2`
+      );
+      const searchResultsData = await response.json();
+      SetInitialFetch(searchResultsData);
+      console.log("searchResultsData is", searchResultsData);
+      grabIds();
+    } catch (err) {
+      console.log("Error is: ", err);
+    }
   };
 
   // Stores the id so we can fetch the additional info
   const grabIds = () => {
+    // const initialDataWeWant = await initialFetch
+    console.log("initialFetch is: ", initialFetch);
     for (let key in initialFetch.results) {
       // SetId([...id, initialFetch.results[key].id]); returns an infinite rerender error
       ids.push(initialFetch.results[key].id);
@@ -100,15 +106,20 @@ function App() {
   // Use the ids of the recipe we searched to get additional info on the recipe
   async function loadRecipes() {
     for (let id of ids) {
-      const response = await fetch(
-        `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`
-      );
-      const recipeInfo = await response.json();
-      console.log("recipeInfo is", recipeInfo);
-      SetRecipeData(recipeInfo);
+      try {
+        const response = await fetch(
+          `https://api.spoonacular.com/recipes/${id}/information?apiKey=${apiKey}`
+        );
+        const recipeInfo = await response.json();
+        console.log("recipeInfo is", recipeInfo);
+        SetRecipeData(recipeInfo);
+      } catch (err) {
+        console.log("Error for loadRecipes is: ", err);
+      }
     }
   }
 
+  console.log("recipeData is (outside of async)", recipeData);
   return (
     <>
       <SearchBar grabSearchResults={grabSearchResults}></SearchBar>

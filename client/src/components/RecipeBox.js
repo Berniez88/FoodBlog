@@ -1,6 +1,7 @@
 import React from "react";
 
 function RecipeBox({ recipeData }) {
+  // const data = await recipeData
   console.log("testing recipeData", recipeData);
   return (
     <>
