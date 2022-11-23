@@ -1,12 +1,11 @@
 import React from "react";
 
-function RecipeBox({ recipeData }) {
-  // const data = await recipeData
-  console.log("testing recipeData", recipeData);
+function RecipeBox({ recipeObjects }) {
+  console.log("testing recipeData", recipeObjects);
   return (
     <>
       <h1>Hello this is RecipeBox</h1>
-      <h1>{recipeData.title}</h1>
+      {/* <h1>{recipeObjects.title}</h1> */}
     </>
   );
 }
