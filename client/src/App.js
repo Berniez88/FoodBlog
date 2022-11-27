@@ -44,31 +44,33 @@ function App() {
         );
         const recipeInfo = await response.json();
         recipeObjects.push(recipeInfo);
-        SetRecipeData(recipeInfo);
+        // SetRecipeData(recipeInfo);
+        console.log(recipeObjects);
       } catch (err) {
         console.log("Error for loadRecipes is: ", err);
       }
     }
-    console.log("recipeObjects is: ", recipeObjects);
+    // console.log("recipeObjects is: ", recipeObjects);
   }
 
   console.log("recipeObjects is outside of the func: ", recipeObjects);
 
   let recipeResults;
+  console.log("okay now recipe is:", recipeObjects);
   if (recipeObjects.length === 0) {
-    recipeResults = <RecipeBox></RecipeBox>;
+    recipeResults = <h1>No recipes searched</h1>;
   } else {
     {
-      <RecipeBox recipeObjects={recipeObjects}></RecipeBox>;
+      recipeResults = <RecipeBox recipeObjects={recipeObjects}></RecipeBox>;
     }
   }
   return (
     <>
       <SearchBar grabSearchResults={grabSearchResults}></SearchBar>
       {recipeResults}
-      {recipeObjects.length && (
+      {/* {recipeObjects.length && (
         <RecipeBox recipeObjects={recipeObjects}></RecipeBox>
-      )}
+      )} */}
     </>
   );
 }

@@ -1,7 +1,7 @@
 import React from "react";
 
 function RecipeBox({ recipeObjects }) {
-  console.log("testing recipeData", recipeObjects);
+  console.log("testing recipeObjects", recipeObjects);
   return (
     <>
       <h1>Hello this is RecipeBox</h1>
