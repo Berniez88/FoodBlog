@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import "../css/SearchBar.css";
 import { Button } from "@mui/material";
-function SearchBar({ grabSearchResults }) {
+function SearchBar({ grabSearchResults, SetRecipeData }) {
   const [searchResults, setSearchResults] = useState("");
 
   const searchRecipe = (e) => {
     e.preventDefault();
     grabSearchResults(searchResults);
+    SetRecipeData([]);
   };
 
   return (
