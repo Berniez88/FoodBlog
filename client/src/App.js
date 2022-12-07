@@ -20,8 +20,8 @@ function App() {
     );
     const initialFetchData = await res.json();
     console.log("initialFetchData", initialFetchData);
-    // SetInitialFetch(initialFetchData.results);
     recipeResults = await grabIds(initialFetchData.results);
+    console.log("recipeResults is: AFTER THE AWAIT ", recipeResults);
   };
 
   // Stores the id so we can fetch the additional info
@@ -53,6 +53,7 @@ function App() {
         console.log("Error for loadRecipes is: ", err);
       }
     }
+
     // if (recipeObjects.length === 0) {
     //   console.log("here");
     //   return <h1>No recipes searched</h1>;
@@ -67,7 +68,6 @@ function App() {
         grabSearchResults={grabSearchResults}
         SetRecipeData={SetRecipeData}
       ></SearchBar>
-      {/* {{ recipeResults }}THIS DOESNT WORK/RETURN ANYTHING */}
       <RecipeBox recipeData={recipeData}></RecipeBox>
     </>
   );
