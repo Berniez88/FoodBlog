@@ -33,3 +33,5 @@ function SearchBar({ grabSearchResults, SetRecipeData }) {
 }
 
 export default SearchBar;
+
+

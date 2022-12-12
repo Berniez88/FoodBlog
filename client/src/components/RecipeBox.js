@@ -5,7 +5,7 @@ import React from "react";
 function RecipeBox({ recipeData }) {
   console.log("testing recipeData", recipeData);
   //! once recipeData is populated we can run our code
-  console.log("the length is: ", recipeData.extendedIngredients.length);
+  // console.log("the length is: ", recipeData.extendedIngredients.length);
   if (recipeData.length === 2) {
     console.log("inside of if");
     let ingredients = [];
